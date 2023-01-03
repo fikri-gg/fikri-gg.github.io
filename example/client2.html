@@ -1,0 +1,23 @@
+<!doctype html>
+<head>
+  <title>Cross Storage Hub</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+  <script type="text/javascript" src="../lib/client.js"></script>
+  <script type="text/javascript">
+    var storage = new CrossStorageClient('https://cd-hub.vercel.app/cross-storage' , {
+      timeout: 5000,
+    });
+
+    storage.onConnect()
+    .then(function() {
+      return storage.get('key1', 'key2');
+    }).then(function(res) {
+      console.log(res); // ['foo', 'bar']
+    })['catch'](function(err) {
+      console.log(err);
+    });
+  </script>
+</body>
+</html>
